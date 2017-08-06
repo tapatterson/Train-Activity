@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Train Schedule</title>
+
+	<!-- Bootstrap and JQuery Links -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+ -->
+    <!-- Moment.js Reference -->
+    <!-- <script src="http://momentjs.com/downloads/moment.js"></script>   -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+</head>
+
+<body>
+	<!-- Train Schedule -->
+	<div id="container">
+
+		<!-- Jumbotron: "Train Schedule" Title -->
+		<div class="jumbotron" style="background-color: blue; color:white; font-family: 'Russo One', sans-serif">
+			<h1 class="text-center">TP Express Train Schedule</h1>
+      <h3 class="text-center">RealTime Data to Check Train Arrival Times!</h3>
+    </div>
+
+		<!-- Panel with a Table. "Current Train Schedule": Include Train Name, Destination, Frequency(Min.), Next Arrival, Minutes Away -->
+		<div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Current Train Schedule</strong></h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover" id="employee-table">
+          <thead>
+            <tr>
+              <th>Train Name</th>
+              <th>Destination</th>
+              <th>Frequency (min.)</th>
+              <th>Next Arrival</th>
+              <th>Minutes Away</th>
+            </tr>
+          </thead>
+          <tbody class="table body">
+          </tbody>
+        </table>
+      </div>
+    </div>
+		<!-- Panel Form with a Submit button. "Add Train": Include Train Name, Destination, First Train Time(HH:mm-military time), Frequency(min), Submit button  -->
+
+		<!-- Add Train  -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Add Train</strong></h3>
+      </div>
+    <div class="panel-body">
+
+    <!-- Entry Form -->
+    	<form>
+        <div class="form-group">
+          <label for="train-name-input">Train Name</label>
+          <input class="form-control" id="train-name-input" type="text">
+        </div>
+        <div class="form-group">
+          <label for="destination-input">Destination</label>
+          <input class="form-control" id="destination-input" type="text">
+        </div>
+        <div class="form-group">
+          <label for="time-input">First Train Time (HH:mm - military time)</label>
+          <input class="form-control" id="time-input" type="text">
+        </div>
+        <div class="form-group">
+          <label for="rate-input">Frequency (min.)</label>
+          <input class="form-control" id="rate-input" type="text">
+        </div>
+        <button class="btn btn-primary" id="add-train-btn" type="submit">Submit</button>
+      </form>
+    </div>
+		</div>
+	</div>
+
+<!-- JavaScript -->
+  <script src="assets/javascript/logic.js"></script>
+
+</body>
+</html>
