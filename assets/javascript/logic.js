@@ -32,9 +32,9 @@ $("#add-train-btn").on("click", function(event) {
 	var trainName = $("#train-name-input").val().trim();
 	var destination = $("#destination-input").val().trim();
 	var firstTrain = moment($("#time-input").val().trim(), "HH:mm").toString();
-	var frequency = $("#rate-input").val().trim();
+	var frequency = $("#rate-input").val().trim(); 
 
-	// Creates local "temporary" object for holding train data
+	//Creates local "temporary" object for holding train data
   var newTrain = {
     name: trainName,
     destination: destination,
@@ -62,6 +62,9 @@ $("#add-train-btn").on("click", function(event) {
   $("rate-input").val("");
 });
 
+	
+
+
   // 3. Create Firebase event for adding train to database. Add table row in the html when a user adds an entry
 database.ref().on("child_added", function(childSnapshot, prevChildKey){
 	console.log(childSnapshot.val());
@@ -79,7 +82,14 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey){
 	console.log(addFrequency);
 
 	//Prettify train start
-	var trainArrive = moment.unix(addTrain).format("m mm");
+	 var trainArrive = moment.unix(addTrain).format("m");
+	// var trainArrive = moment(addTrain "HH:mm").format("LT");
+
+	// var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+
+// Add each train's data into the table
+ 	$("#train-table > tbody").append("<tr><td>" + addTrainName + "</td><td>" + addDestination + "</td><td>"+ addFrequency + "</td><td>" + addTrain + "</td><td>" + addFrequency + "</td><td>");
+});
 
 // 4. Create a way to calculate the train frequency in minutes. Using difference between start and current time.
 // //    Then use moment.js formatting to set difference in minutes.
@@ -88,23 +98,50 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey){
 
 // Calculate the months worked using hardcore math
   // To calculate the months worked
-  var trainTime = moment().diff(moment.unix(trainArrive, "X"), "HH:mm");
-  console.log(trainTime);
+  // var trainTime = moment().diff(addFrequency);
+  // console.log(trainTime);
 
-//   // Calculate the total billed rate
-//   var empBilled = empMonths * empRate;
-//   console.log(empBilled);
+  // // Assumptions
+  //   var tFrequency = 3;
 
-//   // Add each employee's data into the table
-//   $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-//   empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
+  //   // Time is 3:30 AM
+  //   var firstTime = "03:30";
+
+  //   // First Time (pushed back 1 year to make sure it comes before current time)
+  //   var firstTimeConverted = moment(firstTime, "hh:mm").subtract(1, "years");
+  //   console.log(firstTimeConverted);
+  //       // can specify a date in var firstTime to keep from doing this step
+    
+  //   // Current Time
+  //   var currentTime = moment();
+  //   console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+  //   // Difference between the times
+  //   var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+  //   console.log("DIFFERENCE IN TIME: " + diffTime);
+
+  //   // Time apart (remainder)
+  //   var tRemainder = diffTime % tFrequency;
+  //   console.log(tRemainder);
+
+  //   // Minute Until Train
+  //   var tMinutesTillTrain = tFrequency - tRemainder;
+  //   console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+  //   // Next Train
+  //   var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+  //   console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
+
+ // Add each train's data into the table
+//  	$("#train-table > tbody").append("<tr><td>" + addTrainName + "</td><td>" + addDestination + "</td><td>"+ newTrain.first + "</td><td>" + addTrain + "</td><td>" + addFrequency + "</td><td>");
 // });
-});
-// Example Time Math
-// -----------------------------------------------------------------------------
-// Assume Employee start date of January 1, 2015
-// Assume current date is March 1, 2016
 
-// We know that this is 15 months.
-// Now we will create code in moment.js to confirm that any attempt we use mets this test case
+// function(errorObject) {
+//     	console.log("Errors handled: " + errorObject.code);
+//   };
 
+// **Left to Be Coded/Fixed**
+// Change time to minutes
+// Only show the military time and not the date and time
+// When train is added, do not let it submit if all fields not complete
